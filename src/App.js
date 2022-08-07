@@ -7,6 +7,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import validator from "validator"
 import Hero from "./components/Hero"
+import Loader from "./assets/loader.gif"
 const App = () => {
   const [url, setUrl] = useState("")
   const [loading, setLoading] = useState(false)
@@ -117,98 +118,51 @@ const App = () => {
           </div>
         </div>
       </section>
-      <section className="text-gray-400 bg-gray-900 body-font">
-        {!previewData ? (
-          <div style={{ height: "90px" }}></div>
-        ) : (
-          // <div className="container px-5 py-24 mx-auto">
-          //   <div className="flex flex-wrap -m-4">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div className="p-4 md:w-1/3">
-              <div className="h-full border-2 border-white rounded-lg overflow-hidden">
-                <img
-                  className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src={
-                    previewData?.images[0]
-                      ? previewData?.images[0]
-                      : "https://dummyimage.com/720x400"
-                  }
-                  alt="blog"
-                />
-                <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
-                    {previewData?.siteName}
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-white mb-3">
-                    {previewData?.title}
-                  </h1>
-                  <p className="leading-relaxed mb-3">
-                    {previewData?.description}
-                  </p>
-                  <div className="flex items-center flex-wrap ">
-                    <a
-                      href={previewData?.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-red-400 inline-flex items-center md:mb-2 lg:mb-0"
-                    >
-                      View Site
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          //   </div>
-          // </div>
-        )}
-      </section>
-      {previewData ? (
-        <section className="text-gray-400 bg-gray-900 body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
-              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
-                {previewData?.title}
-              </h1>
-              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                {previewData?.description}
-              </p>
-            </div>
-            <div className="flex flex-wrap -m-4">
-              {previewData?.images?.map((img) => (
-                <div key={img} className="lg:w-1/3 sm:w-1/2 p-4">
-                  <div className="flex relative">
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="bg-gray-900 body-font"
+        >
+          <img src={Loader} alt="loader" />
+        </div>
+      ) : (
+        <>
+          <section className="text-gray-400 bg-gray-900 body-font">
+            {!previewData ? (
+              <div style={{ height: "90px" }}></div>
+            ) : (
+              // <div className="container px-5 py-24 mx-auto">
+              //   <div className="flex flex-wrap -m-4">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div className="p-4 md:w-1/3">
+                  <div className="h-full border-2 border-white rounded-lg overflow-hidden">
                     <img
-                      alt="gallery"
-                      className="absolute inset-0 w-full h-full object-cover object-center"
-                      src={img ? img : "https://dummyimage.com/600x360"}
+                      className="lg:h-48 md:h-36 w-full object-cover object-center"
+                      src={
+                        previewData?.images[0]
+                          ? previewData?.images[0]
+                          : "https://dummyimage.com/720x400"
+                      }
+                      alt="blog"
                     />
-                    <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                      <h2 className="tracking-widest text-sm title-font font-medium text-red-400 mb-1">
+                    <div className="p-6">
+                      <h2 className="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
                         {previewData?.siteName}
                       </h2>
                       <h1 className="title-font text-lg font-medium text-white mb-3">
                         {previewData?.title}
                       </h1>
-                      <p className="leading-relaxed">
+                      <p className="leading-relaxed mb-3">
                         {previewData?.description}
                       </p>
                       <div className="flex items-center flex-wrap ">
@@ -236,17 +190,79 @@ const App = () => {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : (
-        <div
-          className="text-gray-400 bg-gray-900 body-font"
-          style={{ height: "90px" }}
-        ></div>
-      )}
+              </div>
+              //   </div>
+              // </div>
+            )}
+          </section>
 
+          {previewData ? (
+            <section className="text-gray-400 bg-gray-900 body-font">
+              <div className="container px-5 py-24 mx-auto">
+                <div className="flex flex-col text-center w-full mb-20">
+                  <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
+                    {previewData?.title}
+                  </h1>
+                  <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                    {previewData?.description}
+                  </p>
+                </div>
+                <div className="flex flex-wrap -m-4">
+                  {previewData?.images?.map((img) => (
+                    <div key={img} className="lg:w-1/3 sm:w-1/2 p-4">
+                      <div className="flex relative">
+                        <img
+                          alt="gallery"
+                          className="absolute inset-0 w-full h-full object-cover object-center"
+                          src={img ? img : "https://dummyimage.com/600x360"}
+                        />
+                        <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
+                          <h2 className="tracking-widest text-sm title-font font-medium text-red-400 mb-1">
+                            {previewData?.siteName}
+                          </h2>
+                          <h1 className="title-font text-lg font-medium text-white mb-3">
+                            {previewData?.title}
+                          </h1>
+                          <p className="leading-relaxed">
+                            {previewData?.description}
+                          </p>
+                          <div className="flex items-center flex-wrap ">
+                            <a
+                              href={previewData?.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-red-400 inline-flex items-center md:mb-2 lg:mb-0"
+                            >
+                              View Site
+                              <svg
+                                className="w-4 h-4 ml-2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          ) : (
+            <div
+              className="text-gray-400 bg-gray-900 body-font"
+              style={{ height: "90px" }}
+            ></div>
+          )}
+        </>
+      )}
       <ToastContainer
         position="top-right"
         autoClose={5000}
